@@ -14,15 +14,15 @@ class DefaultMainRepository @Inject constructor(
             val response = api.getRates(base)
             val result = response.body()
             if(response.isSuccessful && result != null){
-                Resource.Success(result)
+                return Resource.Success(result)
             }
             else
             {
-                Resource.Error(response.message())
+                return Resource.Error(response.message())
             }
 
         } catch (e: Exception){
-            Resource.Error(e.message ?: "An error occurred")
+            return Resource.Error(e.message ?: "An error occurred")
         }
     }
 }
