@@ -18,7 +18,7 @@ class MainViewModel @ViewModelInject constructor(
 ):ViewModel() {
     sealed class CurrencyEvent{
         class Success(val resultText: String): CurrencyEvent()
-        class Failure(val resultText: String): CurrencyEvent()
+        class Failure(val errorText: String): CurrencyEvent()
         object  Loading : CurrencyEvent()
         object  Empty: CurrencyEvent()
     }
@@ -59,11 +59,9 @@ class MainViewModel @ViewModelInject constructor(
                 }
             }
         }
-
+        private  fun getRateForCurrency(currency:String, rates: Rates) = when(currency){
+            "CAD" -> rates.CAD
+            else -> rates.USD
+        }
     }
 
-    private  fun getRateForCurrency(currency:String, rates: Rates) = when(currency){
-        "CAD" -> rates.CAD
-        else -> rates.USD
-    }
-}

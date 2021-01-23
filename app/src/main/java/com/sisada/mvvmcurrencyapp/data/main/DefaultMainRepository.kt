@@ -10,19 +10,17 @@ class DefaultMainRepository @Inject constructor(
     private  val  api: CurrencyApi
 ): MainRepository {
     override suspend fun getRates(base: String): Resource<CurrencyResponse> {
-        try {
+        return try {
             val response = api.getRates(base)
             val result = response.body()
             if(response.isSuccessful && result != null){
-                return Resource.Success(result)
-            }
-            else
-            {
-                return Resource.Error(response.message())
+                Resource.Success(result)
+            } else {
+                Resource.Error(response.message())
             }
 
         } catch (e: Exception){
-            return Resource.Error(e.message ?: "An error occurred")
+            Resource.Error(e.message ?: "An error occurred")
         }
     }
 }
