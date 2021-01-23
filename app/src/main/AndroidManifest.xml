@@ -3,7 +3,7 @@
     package="com.sisada.mvvmcurrencyapp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    
+
     <application
         android:name=".CurrencyApplication"
         android:allowBackup="true"
